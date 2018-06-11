@@ -6,39 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/recipe_iv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center_horizontal"/>
-
-    <TextView
-        android:id="@+id/name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        tools:text="Name of the Recipe" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/step_no_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="6dp"
-            android:text="@string/servings"
-            tools:text="Servings:" />
+            android:padding="6dp"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:backgroundTint="@color/colorPrimaryDark"
+            tools:text="8" />
 
         <TextView
-            android:id="@+id/description_short_tv"
+            android:id="@+id/short_description_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Number of servings for the recipe" />
+            android:padding="6dp"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:text="Short description" />
 
     </LinearLayout>
 
