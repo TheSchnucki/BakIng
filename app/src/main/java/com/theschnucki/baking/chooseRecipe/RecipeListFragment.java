@@ -105,7 +105,7 @@ public class RecipeListFragment extends Fragment implements RecipeAdapter.Recipe
         protected void onPostExecute(ArrayList<Recipe> loadedRecipeList) {
             //TODO add Error Handling if contents is missing
             if (loadedRecipeList != null) {
-                mRecipeAdapter.setRecipeList(loadedRecipeList);;
+                mRecipeAdapter.setRecipeList(loadedRecipeList);
                 Log.v(LOG_TAG, "Recipes loaded");
             } else {
                 Log.v(LOG_TAG, "Recipes empty");

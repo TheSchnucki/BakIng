@@ -35,6 +35,8 @@ public class PrepareActivity extends AppCompatActivity {
                 closeOnError();
             }
         }
+
+
     }
 
     private void closeOnError(){
