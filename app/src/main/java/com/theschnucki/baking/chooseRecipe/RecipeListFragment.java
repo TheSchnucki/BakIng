@@ -1,6 +1,7 @@
 package com.theschnucki.baking.chooseRecipe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.theschnucki.baking.R;
 import com.theschnucki.baking.model.Recipe;
+import com.theschnucki.baking.prepareRecipe.PrepareActivity;
 import com.theschnucki.baking.utilities.JsonUtils;
 import com.theschnucki.baking.utilities.NetworkUtils;
 
@@ -27,6 +29,8 @@ import java.util.ArrayList;
 public class RecipeListFragment extends Fragment implements RecipeAdapter.RecipeAdapterOnClickHandler{
 
     private final static String LOG_TAG = RecipeListFragment.class.getSimpleName();
+
+    public static final String EXTRA_RECIPE = "com.theschnucki.baking.chooseRecipe.RECIPE";
 
     private RecyclerView mRecyclerView;
     private static RecipeAdapter mRecipeAdapter;
@@ -65,7 +69,13 @@ public class RecipeListFragment extends Fragment implements RecipeAdapter.Recipe
 
     @Override
     public void onClick(Recipe recipe){
+
         Log.v(LOG_TAG, "Recipe chosen: " + recipe.getName());
+        Intent intent = new Intent(getActivity(), PrepareActivity.class);
+        intent.putExtra(EXTRA_RECIPE, recipe);
+        Log.v(LOG_TAG, "Here the intent would start the PrepareActivity");
+        // TODO activate intent call if ready
+        startActivity(intent);
     }
 
     public class FetchRecipesTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
@@ -96,7 +106,7 @@ public class RecipeListFragment extends Fragment implements RecipeAdapter.Recipe
         protected void onPostExecute(ArrayList<Recipe> loadedRecipeList) {
             //TODO add Error Handling if contents is missing
             if (loadedRecipeList != null) {
-                mRecipeAdapter.setRecipeList(loadedRecipeList);;
+                mRecipeAdapter.setRecipeList(loadedRecipeList);
                 Log.v(LOG_TAG, "Recipes loaded");
             } else {
                 Log.v(LOG_TAG, "Recipes empty");

@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import com.theschnucki.baking.R;
 
+/**
+ * Created by theSchnucki on 06.06.2018.
+ */
 public class RecipeActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = RecipeActivity.class.getSimpleName();
