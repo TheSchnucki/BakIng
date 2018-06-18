@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.theschnucki.baking.R;
 import com.theschnucki.baking.model.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,7 +58,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
         return mStepList.size();
     }
 
-    public void setStepsList(List<Step> stepsList) {
+    public void setStepsList(ArrayList<Step> stepsList) {
         mStepList = stepsList;
         notifyDataSetChanged();
     }

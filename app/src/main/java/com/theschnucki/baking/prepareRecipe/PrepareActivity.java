@@ -22,7 +22,7 @@ public class PrepareActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe);
+        setContentView(R.layout.activity_preperation);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -36,8 +36,13 @@ public class PrepareActivity extends AppCompatActivity {
             }
         }
 
+        StepsListFragment stepsListFragment = new StepsListFragment();
+        stepsListFragment.setArguments(getIntent().getBundleExtra(RecipeListFragment.EXTRA_RECIPE));
 
+        Log.v(LOG_TAG, "Recipe name: " + recipe.getName());
     }
+
+
 
     private void closeOnError(){
         finish();

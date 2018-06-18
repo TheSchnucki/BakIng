@@ -30,7 +30,7 @@ public class RecipeListFragment extends Fragment implements RecipeAdapter.Recipe
 
     private final static String LOG_TAG = RecipeListFragment.class.getSimpleName();
 
-    public static final String EXTRA_RECIPE = "com.theschnucki.baking.chooseRecipe.RECUPE";
+    public static final String EXTRA_RECIPE = "com.theschnucki.baking.chooseRecipe.RECIPE";
 
     private RecyclerView mRecyclerView;
     private static RecipeAdapter mRecipeAdapter;
@@ -73,8 +73,9 @@ public class RecipeListFragment extends Fragment implements RecipeAdapter.Recipe
         Log.v(LOG_TAG, "Recipe chosen: " + recipe.getName());
         Intent intent = new Intent(getActivity(), PrepareActivity.class);
         intent.putExtra(EXTRA_RECIPE, recipe);
-        Log.v(LOG_TAG, "Here the intent would start the PrepareActivity, but it is Disabled");
-        //startActivity(intent);
+        Log.v(LOG_TAG, "Here the intent would start the PrepareActivity");
+        // TODO activate intent call if ready
+        startActivity(intent);
     }
 
     public class FetchRecipesTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
