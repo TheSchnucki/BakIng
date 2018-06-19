@@ -82,6 +82,7 @@ public class JsonUtils {
                     Log.v(LOG_TAG, "Recipe: " + i + " Ingredient: " + j);
                     ingredients.add(ingredient);
                 }
+                recipe.setIngredients(ingredients);
 
                 JSONArray stepListJson = singleRecipe.getJSONArray(RECIPE_STEPS_ARRAY);
                 for (int k = 0; k < stepListJson.length(); k++){
@@ -100,6 +101,7 @@ public class JsonUtils {
                     Log.v(LOG_TAG, "Recipe: " + i + " Description: " + k);
                     steps.add(step);
                 }
+                recipe.setSteps(steps);
 
                 recipe.setServings(singleRecipe.getString(RECIPE_SERVINGS));
                 recipe.setImageURL(singleRecipe.getString(RECIPE_IMAGE_URL));
