@@ -1,5 +1,6 @@
 package com.theschnucki.baking.prepareRecipe;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,25 @@ public class StepsListFragment extends Fragment implements StepsAdapter.StepsAda
 
     private RecyclerView mRecyclerView;
     private static StepsAdapter mStepsAdapter;
+
+    //Interface that triggers a callback in the host Activity
+    OnStepChosenListener mCallback;
+
+    //interface that calls a method in the host activity called onStepSelected
+    public interface OnStepChosenListener {
+        void onStepSelected (Step step);
+    }
+
+    @Override
+    public void onAttach (Context context) {
+        super.onAttach(context);
+
+        try {
+            mCallback = (OnStepChosenListener) context;
+        } catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + "must implement OnStepChosenListener");
+        }
+    }
 
     // Required empty public constructor
     public StepsListFragment() {}
@@ -63,6 +83,7 @@ public class StepsListFragment extends Fragment implements StepsAdapter.StepsAda
     public void onClick(Step step) {
         Log.v(LOG_TAG, "Step chosen: " + step.getId());
         //TODO implement a change in fragment to show the step description and video
+        mCallback.onStepSelected(step);
     }
 
     // TODO set Step list from recipe
