@@ -3,6 +3,7 @@ package com.theschnucki.baking.prepareRecipe;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,6 +48,8 @@ public class StepsListFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.step_list_rv);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
 
         mStepsAdapter = new StepsAdapter();
 
