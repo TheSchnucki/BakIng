@@ -73,8 +73,7 @@ public class RecipeListFragment extends Fragment implements RecipeAdapter.Recipe
         Log.v(LOG_TAG, "Recipe chosen: " + recipe.getName());
         Intent intent = new Intent(getActivity(), PrepareActivity.class);
         intent.putExtra(EXTRA_RECIPE, recipe);
-        Log.v(LOG_TAG, "Here the intent would start the PrepareActivity");
-        // TODO activate intent call if ready
+
         startActivity(intent);
     }
 
