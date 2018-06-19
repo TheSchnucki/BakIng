@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by theSchnucki on 11.06.2018.
  */
-public class PrepareActivity extends AppCompatActivity {
+public class PrepareActivity extends AppCompatActivity implements StepsListFragment.OnStepChosenListener{
 
     private static final String LOG_TAG = RecipeActivity.class.getSimpleName();
 
@@ -57,15 +57,17 @@ public class PrepareActivity extends AppCompatActivity {
 
 
 
-    public void showDetailFragment (Step step) {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("step", step);
+    public void onStepSelected (Step step) {
 
-        StepDetailFragment stepDetailFragment = new StepDetailFragment();
-        stepDetailFragment.setArguments(bundle);
-
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment).commit();
+        Log.v(LOG_TAG, "-----Step: " + step.getId() + " selected");
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable("step", step);
+//
+//        StepDetailFragment stepDetailFragment = new StepDetailFragment();
+//        stepDetailFragment.setArguments(bundle);
+//
+//        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment).commit();
     }
 
 
