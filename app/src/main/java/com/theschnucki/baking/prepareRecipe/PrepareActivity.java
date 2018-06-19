@@ -1,5 +1,6 @@
 package com.theschnucki.baking.prepareRecipe;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,9 @@ import com.theschnucki.baking.R;
 import com.theschnucki.baking.chooseRecipe.RecipeActivity;
 import com.theschnucki.baking.chooseRecipe.RecipeListFragment;
 import com.theschnucki.baking.model.Recipe;
+import com.theschnucki.baking.model.Step;
+
+import java.util.ArrayList;
 
 /**
  * Created by theSchnucki on 11.06.2018.
@@ -36,8 +40,16 @@ public class PrepareActivity extends AppCompatActivity {
             }
         }
 
+        ArrayList<Step> steps = recipe.getSteps();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("steps", steps);
+
         StepsListFragment stepsListFragment = new StepsListFragment();
-        stepsListFragment.setArguments(getIntent().getBundleExtra(RecipeListFragment.EXTRA_RECIPE));
+        stepsListFragment.setArguments(bundle);
+
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.step_list_fl, stepsListFragment).commit();
+
 
         Log.v(LOG_TAG, "Recipe name: " + recipe.getName());
     }

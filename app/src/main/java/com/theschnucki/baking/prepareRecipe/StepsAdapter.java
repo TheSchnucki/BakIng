@@ -47,9 +47,9 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
     }
 
     @Override
-    public void onBindViewHolder (StepsAdapterViewHolder stepsAdapterViewHolder, int postition) {
-        stepsAdapterViewHolder.stepNoTv.setText(mStepList.get(postition).getId());
-        stepsAdapterViewHolder.descriptionTv.setText(mStepList.get(postition). getShortDescription());
+    public void onBindViewHolder (StepsAdapterViewHolder stepsAdapterViewHolder, int position) {
+        stepsAdapterViewHolder.stepNoTv.setText(String.valueOf(position));
+        stepsAdapterViewHolder.descriptionTv.setText(mStepList.get(position). getShortDescription());
     }
 
     @Override

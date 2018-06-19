@@ -25,7 +25,7 @@ public class StepsListFragment extends Fragment {
 
     private final static String LOG_TAG = StepsListFragment.class.getSimpleName();
 
-    private Recipe recipe;
+    private ArrayList<Step> steps;
 
     private RecyclerView mRecyclerView;
     private static StepsAdapter mStepsAdapter;
@@ -37,10 +37,6 @@ public class StepsListFragment extends Fragment {
     public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (this.getArguments() != null){
-            recipe = this.getArguments().getParcelable(RecipeListFragment.EXTRA_RECIPE);
-            mStepsAdapter.setStepsList(recipe.getSteps());
-        }
     }
 
     @Override
@@ -56,9 +52,18 @@ public class StepsListFragment extends Fragment {
 
         mRecyclerView.setAdapter(mStepsAdapter);
 
+        loadStepsData();
+
         return  rootView;
     }
 
         // TODO set Step list from recipe
-
+        private void loadStepsData () {
+            if (getArguments() != null){
+                Bundle extras = getArguments();
+                steps = extras.getParcelableArrayList("steps");
+                Log.v(LOG_TAG,"-----" + steps.size());
+                mStepsAdapter.setStepsList(steps);
+            }
+        }
 }
