@@ -23,6 +23,7 @@ public class PrepareActivity extends AppCompatActivity {
 
     public static Recipe recipe = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +49,24 @@ public class PrepareActivity extends AppCompatActivity {
         stepsListFragment.setArguments(bundle);
 
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.step_list_fl, stepsListFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.activity_prepare_fl, stepsListFragment).commit();
 
 
         Log.v(LOG_TAG, "Recipe name: " + recipe.getName());
     }
 
+
+
+    public void showDetailFragment (Step step) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("step", step);
+
+        StepDetailFragment stepDetailFragment = new StepDetailFragment();
+        stepDetailFragment.setArguments(bundle);
+
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment).commit();
+    }
 
 
     private void closeOnError(){

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by theSchnucki on 11.06.2018.
  */
-public class StepsListFragment extends Fragment implements StepsAdapter.StepsAdapterOnClickHandler {
+public class StepsListFragment extends Fragment implements StepsAdapter.StepsAdapterOnClickHandler{
 
     private final static String LOG_TAG = StepsListFragment.class.getSimpleName();
 
@@ -31,13 +31,12 @@ public class StepsListFragment extends Fragment implements StepsAdapter.StepsAda
     private RecyclerView mRecyclerView;
     private static StepsAdapter mStepsAdapter;
 
-    //empty Constructor
+    // Required empty public constructor
     public StepsListFragment() {}
 
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -75,6 +74,4 @@ public class StepsListFragment extends Fragment implements StepsAdapter.StepsAda
             mStepsAdapter.setStepsList(steps);
         }
     }
-
-
 }
