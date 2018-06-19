@@ -2,6 +2,7 @@ package com.theschnucki.baking.prepareRecipe;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,17 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
 
     private List<Step> mStepList;
 
+    private final StepsAdapterOnClickHandler mClickHandler;
+
+    public interface StepsAdapterOnClickHandler {
+        void onClick (Step step);
+    }
+
     //Constructor
-    public StepsAdapter() {}
+    public StepsAdapter(StepsAdapterOnClickHandler clickHandler) {mClickHandler = clickHandler;}
 
 
-    public class StepsAdapterViewHolder extends RecyclerView.ViewHolder {
+    public class StepsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView stepNoTv;
         public TextView descriptionTv;
 
@@ -34,6 +41,15 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
             super(view);
             stepNoTv = view.findViewById(R.id.step_no_tv);
             descriptionTv = view.findViewById(R.id.short_description_tv);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int adapterPosition = getAdapterPosition();
+            Log.v(LOG_TAG, "Steps Adapter onClick Position" + adapterPosition);
+            Step step = mStepList.get(adapterPosition);
+            mClickHandler.onClick(step);
         }
     }
 

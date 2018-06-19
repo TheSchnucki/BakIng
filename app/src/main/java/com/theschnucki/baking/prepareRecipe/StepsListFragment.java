@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by theSchnucki on 11.06.2018.
  */
-public class StepsListFragment extends Fragment {
+public class StepsListFragment extends Fragment implements StepsAdapter.StepsAdapterOnClickHandler {
 
     private final static String LOG_TAG = StepsListFragment.class.getSimpleName();
 
@@ -41,9 +41,9 @@ public class StepsListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup containter, Bundle savedInstanceStates) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStates) {
 
-        View rootView = inflater.inflate(R.layout.fragment_step_list, containter, false);
+        View rootView = inflater.inflate(R.layout.fragment_step_list, container, false);
 
         mRecyclerView = rootView.findViewById(R.id.step_list_rv);
 
@@ -51,7 +51,7 @@ public class StepsListFragment extends Fragment {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
 
-        mStepsAdapter = new StepsAdapter();
+        mStepsAdapter = new StepsAdapter(this);
 
         mRecyclerView.setAdapter(mStepsAdapter);
 
@@ -60,13 +60,21 @@ public class StepsListFragment extends Fragment {
         return  rootView;
     }
 
-        // TODO set Step list from recipe
-        private void loadStepsData () {
-            if (getArguments() != null){
-                Bundle extras = getArguments();
-                steps = extras.getParcelableArrayList("steps");
-                Log.v(LOG_TAG,"-----" + steps.size());
-                mStepsAdapter.setStepsList(steps);
-            }
+    @Override
+    public void onClick(Step step) {
+        Log.v(LOG_TAG, "Step chosen: " + step.getId());
+        //TODO implement a change in fragment to show the step description and video
+    }
+
+    // TODO set Step list from recipe
+    private void loadStepsData () {
+        if (getArguments() != null){
+            Bundle extras = getArguments();
+            steps = extras.getParcelableArrayList("steps");
+            Log.v(LOG_TAG,"-----" + steps.size());
+            mStepsAdapter.setStepsList(steps);
         }
+    }
+
+
 }
