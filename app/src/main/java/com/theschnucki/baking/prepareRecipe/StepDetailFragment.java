@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -61,6 +62,9 @@ public class StepDetailFragment extends Fragment {
 
         mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.ic_no_picture));
 
+        //initialize ExoPlayer
+        String videoUrl = step.getVideoURL();
+        Log.v(LOG_TAG, "----- Is valid URL: " + URLUtil.isValidUrl(videoUrl));
 
         return rootView;
     }
