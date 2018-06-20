@@ -82,11 +82,10 @@ public class StepsListFragment extends Fragment implements StepsAdapter.StepsAda
     @Override
     public void onClick(Step step) {
         Log.v(LOG_TAG, "Step chosen: " + step.getId());
-        //TODO implement a change in fragment to show the step description and video
         mCallback.onStepSelected(step);
     }
 
-    // TODO set Step list from recipe
+
     private void loadStepsData () {
         if (getArguments() != null){
             Bundle extras = getArguments();
