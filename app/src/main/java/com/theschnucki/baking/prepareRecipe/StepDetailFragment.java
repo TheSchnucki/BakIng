@@ -1,6 +1,7 @@
 package com.theschnucki.baking.prepareRecipe;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.theschnucki.baking.R;
 import com.theschnucki.baking.model.Step;
 
@@ -21,9 +25,11 @@ public class StepDetailFragment extends Fragment {
     private final static String LOG_TAG = StepDetailFragment.class.getSimpleName();
 
     private TextView shortDescriptionTv;
-    private TextView videoTv;
     private TextView descriptionTv;
     private TextView navigationTv;
+
+    private SimpleExoPlayer mExoPlayer;
+    private PlayerView mPlayerView;
 
     private Step step;
 
@@ -45,14 +51,15 @@ public class StepDetailFragment extends Fragment {
         loadStepData();
 
         shortDescriptionTv = rootView.findViewById(R.id.step_short_description_tv);
-        videoTv = rootView.findViewById(R.id.step_video_tv);
+        mPlayerView = rootView.findViewById(R.id.step_video);
         descriptionTv = rootView.findViewById(R.id.step_description_tv);
         navigationTv = rootView.findViewById(R.id.step_navigation_tv);
 
         shortDescriptionTv.setText(step.getShortDescription());
-        videoTv.setText("VIDEO \n" + step.getVideoURL());
         descriptionTv.setText(step.getDescription());
         navigationTv.setText("NAVIGATION");
+
+        mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.ic_no_picture));
 
 
         return rootView;

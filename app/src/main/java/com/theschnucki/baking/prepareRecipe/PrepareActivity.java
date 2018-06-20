@@ -44,6 +44,9 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
             }
         }
 
+        //Set ActionBar Title to Recipe Name
+        getSupportActionBar().setTitle(recipe.getName());
+
         ArrayList<Step> steps = recipe.getSteps();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("steps", steps);

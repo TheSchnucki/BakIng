@@ -12,23 +12,19 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         tools:text="Step Title" />
 
-    <TextView
-        android:id="@+id/step_video_tv"
-        android:layout_width="wrap_content"
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/step_video"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/step_short_description_tv"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimaryDark"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        tools:text="Video" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/step_description_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/step_video_tv"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:padding="12dp"
         tools:text="Step description" />
 
