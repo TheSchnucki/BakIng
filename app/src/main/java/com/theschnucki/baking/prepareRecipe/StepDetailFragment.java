@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.theschnucki.baking.R;
 import com.theschnucki.baking.model.Step;
@@ -18,6 +19,11 @@ import com.theschnucki.baking.model.Step;
 public class StepDetailFragment extends Fragment {
 
     private final static String LOG_TAG = StepDetailFragment.class.getSimpleName();
+
+    private TextView shortDescriptionTv;
+    private TextView videoTv;
+    private TextView descriptionTv;
+    private TextView navigationTv;
 
     private Step step;
 
@@ -34,9 +40,22 @@ public class StepDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        View rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
+
         loadStepData();
 
-        return inflater.inflate(R.layout.fragment_step_detail, container, false);
+        shortDescriptionTv = rootView.findViewById(R.id.step_short_description_tv);
+        videoTv = rootView.findViewById(R.id.step_video_tv);
+        descriptionTv = rootView.findViewById(R.id.step_description_tv);
+        navigationTv = rootView.findViewById(R.id.step_navigation_tv);
+
+        shortDescriptionTv.setText(step.getShortDescription());
+        videoTv.setText("VIDEO \n" + step.getVideoURL());
+        descriptionTv.setText(step.getDescription());
+        navigationTv.setText("NAVIGATION");
+
+
+        return rootView;
     }
 
     private void loadStepData () {
