@@ -21,8 +21,11 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
 
     private static final String LOG_TAG = RecipeActivity.class.getSimpleName();
 
+    android.support.v4.app.FragmentManager fragmentManager;
+
     public static Recipe recipe = null;
 
+    //TODO preserve display on rotation (fragment)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
             }
         }
 
+        //Set ActionBar Title to Recipe Name
+        getSupportActionBar().setTitle(recipe.getName());
+
         ArrayList<Step> steps = recipe.getSteps();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("steps", steps);
@@ -48,7 +54,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         StepsListFragment stepsListFragment = new StepsListFragment();
         stepsListFragment.setArguments(bundle);
 
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.activity_prepare_fl, stepsListFragment).commit();
 
 
@@ -60,14 +66,14 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
     public void onStepSelected (Step step) {
 
         Log.v(LOG_TAG, "-----Step: " + step.getId() + " selected");
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable("step", step);
-//
-//        StepDetailFragment stepDetailFragment = new StepDetailFragment();
-//        stepDetailFragment.setArguments(bundle);
-//
-//        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment).commit();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("step", step);
+
+        StepDetailFragment stepDetailFragment = new StepDetailFragment();
+        stepDetailFragment.setArguments(bundle);
+
+
+        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment).commit();
     }
 
 
