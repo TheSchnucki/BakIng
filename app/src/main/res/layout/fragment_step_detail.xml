@@ -39,13 +39,29 @@
         android:layout_gravity="bottom"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/step_navigation_tv"
+        <Button
+            android:id="@+id/back_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            tools:text="navigation Buttons" />
+            android:layout_weight="1"
+            android:text="@string/back_button"
+            android:onClick="stepNavigationBack"/>
+
+        <Button
+            android:id="@+id/steps_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/menu_button"
+            android:onClick="stepNavigationSteps"/>
+
+        <Button
+            android:id="@+id/forward_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/forward_button"
+            android:onClick="stepNavigationForward"/>
 
     </LinearLayout>
 

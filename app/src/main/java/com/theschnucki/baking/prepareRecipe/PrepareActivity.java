@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.theschnucki.baking.R;
 import com.theschnucki.baking.chooseRecipe.RecipeActivity;
@@ -24,6 +26,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
     android.support.v4.app.FragmentManager fragmentManager;
 
     public static Recipe recipe = null;
+    public static Step step = null;
 
     //TODO preserve display on rotation (fragment)
 
@@ -47,6 +50,12 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         //Set ActionBar Title to Recipe Name
         getSupportActionBar().setTitle(recipe.getName());
 
+        showStepList(recipe);
+
+        Log.v(LOG_TAG, "Recipe name: " + recipe.getName());
+    }
+
+    public void showStepList(Recipe recipe) {
         ArrayList<Step> steps = recipe.getSteps();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("steps", steps);
@@ -55,27 +64,47 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         stepsListFragment.setArguments(bundle);
 
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.activity_prepare_fl, stepsListFragment).commit();
-
-
-        Log.v(LOG_TAG, "Recipe name: " + recipe.getName());
+        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepsListFragment).commit();
     }
 
 
-
+    // Set Step detail view Fragment
     public void onStepSelected (Step step) {
 
         Log.v(LOG_TAG, "-----Step: " + step.getId() + " selected");
+
+        this.step = step;
+
         Bundle bundle = new Bundle();
         bundle.putParcelable("step", step);
 
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
         stepDetailFragment.setArguments(bundle);
 
-
         fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment).commit();
     }
 
+    /** Step Detail button navigation */
+    public void stepNavigationBack (View view) {
+        if (step.getId() > 0) {
+            step = recipe.getSteps().get(step.getId()-1);
+            onStepSelected(step);
+        } else {
+            Toast.makeText(this, "This is already the first step", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void stepNavigationSteps (View view) {
+        showStepList(recipe);
+    }
+
+    public void stepNavigationForward (View view) {
+        if (step.getId() < (recipe.getSteps().size() -1)) {
+            step = recipe.getSteps().get(step.getId()+1);
+            onStepSelected(step);
+        } else {
+            Toast.makeText(this, "This is already the last step", Toast.LENGTH_LONG).show();
+        }    }
 
     private void closeOnError(){
         finish();

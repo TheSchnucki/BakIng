@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.theschnucki.baking.R;
 import com.theschnucki.baking.model.Step;
@@ -21,7 +22,7 @@ public class StepDetailFragment extends Fragment {
 
     private TextView shortDescriptionTv;
     private TextView descriptionTv;
-    private TextView navigationTv;
+
 
     //private SimpleExoPlayer mExoPlayer;
     //private PlayerView mPlayerView;
@@ -48,11 +49,10 @@ public class StepDetailFragment extends Fragment {
         shortDescriptionTv = rootView.findViewById(R.id.step_short_description_tv);
         //mPlayerView = rootView.findViewById(R.id.step_video);
         descriptionTv = rootView.findViewById(R.id.step_description_tv);
-        navigationTv = rootView.findViewById(R.id.step_navigation_tv);
 
         shortDescriptionTv.setText(step.getShortDescription());
         descriptionTv.setText(step.getDescription());
-        navigationTv.setText("NAVIGATION");
+
 
         //mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.ic_no_picture));
 
@@ -70,5 +70,7 @@ public class StepDetailFragment extends Fragment {
             Log.v(LOG_TAG, "------ Step " + step.getShortDescription());
         }
     }
+
+
 
 }
