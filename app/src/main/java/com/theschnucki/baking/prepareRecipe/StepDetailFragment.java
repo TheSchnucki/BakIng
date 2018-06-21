@@ -1,8 +1,5 @@
 package com.theschnucki.baking.prepareRecipe;
 
-import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,9 +9,6 @@ import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.TextView;
 
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.theschnucki.baking.R;
 import com.theschnucki.baking.model.Step;
 
@@ -29,8 +23,8 @@ public class StepDetailFragment extends Fragment {
     private TextView descriptionTv;
     private TextView navigationTv;
 
-    private SimpleExoPlayer mExoPlayer;
-    private PlayerView mPlayerView;
+    //private SimpleExoPlayer mExoPlayer;
+    //private PlayerView mPlayerView;
 
     private Step step;
 
@@ -52,7 +46,7 @@ public class StepDetailFragment extends Fragment {
         loadStepData();
 
         shortDescriptionTv = rootView.findViewById(R.id.step_short_description_tv);
-        mPlayerView = rootView.findViewById(R.id.step_video);
+        //mPlayerView = rootView.findViewById(R.id.step_video);
         descriptionTv = rootView.findViewById(R.id.step_description_tv);
         navigationTv = rootView.findViewById(R.id.step_navigation_tv);
 
@@ -60,9 +54,9 @@ public class StepDetailFragment extends Fragment {
         descriptionTv.setText(step.getDescription());
         navigationTv.setText("NAVIGATION");
 
-        mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.ic_no_picture));
+        //mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.ic_no_picture));
 
-        //initialize ExoPlayer
+        // TODO initialize ExoPlayer
         String videoUrl = step.getVideoURL();
         Log.v(LOG_TAG, "----- Is valid URL: " + URLUtil.isValidUrl(videoUrl));
 

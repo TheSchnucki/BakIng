@@ -12,12 +12,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         tools:text="Step Title" />
 
-    <com.google.android.exoplayer2.ui.PlayerView
+<!--TODO Player window enable -->
+<!--    <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/step_video"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_below="@+id/step_short_description_tv"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
 
     <TextView
         android:id="@+id/step_description_tv"
