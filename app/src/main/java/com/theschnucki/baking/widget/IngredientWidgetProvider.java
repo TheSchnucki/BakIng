@@ -3,6 +3,8 @@ package com.theschnucki.baking.widget;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import com.theschnucki.baking.R;
@@ -16,8 +18,13 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, Recipe recipe,int appWidgetId) {
 
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
-        views.setTextViewText(R.id.appwidget_text, recipe.getName());
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget_list);
+
+        //Set the ListWidgetServiceIntent to act as the adapter for the ListView
+        Intent intent = new Intent(context, ListWidgetService.class);
+        views.setRemoteAdapter(R.id.widget_ingredient_list, intent);
+
+        //Set DetailActivity intent to launch when clicked
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
