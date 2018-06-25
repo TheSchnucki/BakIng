@@ -4,4 +4,6 @@
     <string name="back_button">Prev.</string>
     <string name="forward_button">Next</string>
     <string name="menu_button">Steps</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

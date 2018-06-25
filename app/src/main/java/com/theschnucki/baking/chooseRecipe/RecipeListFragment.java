@@ -1,5 +1,6 @@
 package com.theschnucki.baking.chooseRecipe;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,6 +20,7 @@ import com.theschnucki.baking.model.Recipe;
 import com.theschnucki.baking.prepareRecipe.PrepareActivity;
 import com.theschnucki.baking.utilities.JsonUtils;
 import com.theschnucki.baking.utilities.NetworkUtils;
+import com.theschnucki.baking.widget.IngredientWidgetService;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,8 +73,17 @@ public class RecipeListFragment extends Fragment implements RecipeAdapter.Recipe
     public void onClick(Recipe recipe){
 
         Log.v(LOG_TAG, "Recipe chosen: " + recipe.getName());
+
+        /**Update ingredients Widget's recipe*/
+        IngredientWidgetService.startActionUpdateRecipe(getContext(), recipe);
+
+        /**Start detail Activity*/
         Intent intent = new Intent(getActivity(), PrepareActivity.class);
         intent.putExtra(EXTRA_RECIPE, recipe);
+
+
+        /**Update ingredients Widget*/
+        IngredientWidgetService.startActionUpdateIngredients(getContext());
 
         startActivity(intent);
     }
