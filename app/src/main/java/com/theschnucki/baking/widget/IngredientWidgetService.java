@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.Context;
 import android.util.Log;
 
+import com.theschnucki.baking.R;
 import com.theschnucki.baking.model.Recipe;
 
 /**
@@ -26,33 +27,21 @@ public class IngredientWidgetService extends IntentService {
 
     private static final String EXTRA_RECIPE = "com.theschnucki.baking.widget.extra.RECIPE";
 
-    private Recipe recipe = null;
+    private static Recipe recipe = null;
 
     public IngredientWidgetService() {
         super("IngredientWidgetService");
     }
 
-    /**
-     * Starts this service to perform action Foo with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *
-     * @see IntentService
-     */
-    // TODO: Customize helper method
+
     public static void startActionUpdateIngredients (Context context) {
         Intent intent = new Intent(context, IngredientWidgetService.class);
         intent.setAction(ACTION_UPDATE_INGREDIENTS);
-        //intent.putExtra(EXTRA_RECIPE, recipe);
         context.startService(intent);
 
 
-    }    /**
-     * Starts this service to perform action Foo with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *
-     * @see IntentService
-     */
-    // TODO: Customize helper method
+    }
+
     public static void startActionUpdateRecipe (Context context, Recipe recipe) {
         Intent intent = new Intent(context, IngredientWidgetService.class);
         intent.setAction(ACTION_UPDATE_RECIPE);
@@ -79,14 +68,27 @@ public class IngredientWidgetService extends IntentService {
      * parameters.
      */
     private void handleActionUpdateIngredients() {
-        Log.v(LOG_TAG, "----- Service Handler for Ingredients is working");
+        Log.v(LOG_TAG, "----- Service Handler for Ingredients is working" + recipe.getName());
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, IngredientWidgetProvider.class));
+
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_ingredient_list);
 
         IngredientWidgetProvider.updateIngredientWidgets(this, appWidgetManager, recipe, appWidgetIds);
     }
 
     private void handleActionUpdateRecipe() {
         Log.v(LOG_TAG, "----- Service Handler for Recipe is working for" + recipe.getName());
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, IngredientWidgetProvider.class));
+
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_ingredient_list);
+
+        IngredientWidgetProvider.updateIngredientWidgets(this, appWidgetManager, recipe, appWidgetIds);
     }
+
+    public static Recipe getRecipe  () {
+        return recipe;
+    }
+
 }

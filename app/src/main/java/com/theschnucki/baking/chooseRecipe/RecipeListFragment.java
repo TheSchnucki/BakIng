@@ -81,7 +81,6 @@ public class RecipeListFragment extends Fragment implements RecipeAdapter.Recipe
         Intent intent = new Intent(getActivity(), PrepareActivity.class);
         intent.putExtra(EXTRA_RECIPE, recipe);
 
-
         /**Update ingredients Widget*/
         IngredientWidgetService.startActionUpdateIngredients(getContext());
 
