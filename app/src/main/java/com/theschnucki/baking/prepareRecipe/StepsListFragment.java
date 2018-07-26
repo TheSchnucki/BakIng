@@ -13,12 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.theschnucki.baking.R;
-import com.theschnucki.baking.chooseRecipe.RecipeListFragment;
-import com.theschnucki.baking.model.Recipe;
 import com.theschnucki.baking.model.Step;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by theSchnucki on 11.06.2018.
