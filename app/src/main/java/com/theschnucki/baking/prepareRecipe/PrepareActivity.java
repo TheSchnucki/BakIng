@@ -68,6 +68,18 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepsListFragment).commit();
     }
 
+    public void switchToStepList(View view) {
+        ArrayList<Step> steps = recipe.getSteps();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("steps", steps);
+
+        StepsListFragment stepsListFragment = new StepsListFragment();
+        stepsListFragment.setArguments(bundle);
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepsListFragment).commit();
+    }
+
 
     public void showIngredientList (View view) {
         ArrayList<Ingredient> ingredients = recipe.getIngredients();

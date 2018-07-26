@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<android.support.v7.widget.RecyclerView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ingredient_list_rv"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentLeft="true">
+    tools:context=".prepareRecipe.PrepareActivity">
 
-</android.support.v7.widget.RecyclerView>
+    <Button
+        android:id="@+id/step_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:onClick="switchToStepList"
+        android:text="@string/step_button"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ingredient_list_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/step_button">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
