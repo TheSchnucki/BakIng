@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.theschnucki.baking.R;
 import com.theschnucki.baking.chooseRecipe.RecipeActivity;
 import com.theschnucki.baking.chooseRecipe.RecipeListFragment;
+import com.theschnucki.baking.model.Ingredient;
 import com.theschnucki.baking.model.Recipe;
 import com.theschnucki.baking.model.Step;
 
@@ -68,6 +69,20 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
     }
 
 
+    public void showIngredientList (View view) {
+        ArrayList<Ingredient> ingredients = recipe.getIngredients();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("ingredients", ingredients);
+
+        IngredientListFragment ingredientListFragment = new IngredientListFragment();
+        ingredientListFragment.setArguments(bundle);
+
+        Log.v(LOG_TAG,"Show ingredient List button pressed");
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, ingredientListFragment).commit();
+    }
+
     // Set Step detail view Fragment
     public void onStepSelected (Step step) {
 
@@ -93,6 +108,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
             Toast.makeText(this, "This is already the first step", Toast.LENGTH_LONG).show();
         }
     }
+
 
     public void stepNavigationSteps (View view) {
         showStepList(recipe);
