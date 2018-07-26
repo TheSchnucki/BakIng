@@ -94,6 +94,12 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         }
     }
 
+    public void showIngredientList (View view) {
+        Toast.makeText(getApplicationContext(), "Show ingredient List button pressed",
+                Toast.LENGTH_LONG).show();
+        Log.v(LOG_TAG,"Show ingredient List button pressed");
+    }
+
     public void stepNavigationSteps (View view) {
         showStepList(recipe);
     }
