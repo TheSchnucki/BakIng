@@ -57,7 +57,7 @@ public class StepsListFragment extends Fragment implements StepsAdapter.StepsAda
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStates) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_step_list, container, false);
 
@@ -71,7 +71,11 @@ public class StepsListFragment extends Fragment implements StepsAdapter.StepsAda
 
         mRecyclerView.setAdapter(mStepsAdapter);
 
-        loadStepsData();
+        if (savedInstanceState != null){
+            steps = savedInstanceState.getParcelableArrayList("steps");
+        } else {
+            loadStepsData();
+        }
 
         return  rootView;
     }
@@ -90,5 +94,11 @@ public class StepsListFragment extends Fragment implements StepsAdapter.StepsAda
             Log.v(LOG_TAG,"-----" + steps.size());
             mStepsAdapter.setStepsList(steps);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("steps", steps);
     }
 }
