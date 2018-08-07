@@ -66,6 +66,8 @@ public class StepDetailFragment extends Fragment {
             loadStepData();
         }
 
+
+
         shortDescriptionTv = rootView.findViewById(R.id.step_short_description_tv);
         mPlayerView = rootView.findViewById(R.id.step_video);
         descriptionTv = rootView.findViewById(R.id.step_description_tv);

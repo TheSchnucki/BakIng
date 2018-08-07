@@ -137,6 +137,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
         stepDetailFragment.setArguments(bundle);
 
+        fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment, "stepDetailFragment").commit();
         fragmentTag = "stepDetailFragment";
     }
