@@ -43,7 +43,7 @@ public class StepDetailFragment extends Fragment {
     private PlayerView mPlayerView;
     private SimpleExoPlayer mExoPlayer;
 
-    private Step step;
+    private Step step = null;
 
     // Required empty public constructor
     public StepDetailFragment() {}
