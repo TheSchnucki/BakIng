@@ -60,7 +60,11 @@ public class StepDetailFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
 
-        loadStepData();
+        if (savedInstanceState != null){
+            step = savedInstanceState.getParcelable("step");
+        } else {
+            loadStepData();
+        }
 
         shortDescriptionTv = rootView.findViewById(R.id.step_short_description_tv);
         mPlayerView = rootView.findViewById(R.id.step_video);
@@ -85,6 +89,14 @@ public class StepDetailFragment extends Fragment {
         }
 
         return rootView;
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (savedInstanceState != null){
+
+        }
     }
 
     private void loadStepData () {
@@ -116,6 +128,12 @@ public class StepDetailFragment extends Fragment {
             mExoPlayer.release();
             mExoPlayer = null;
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("step", step);
     }
 
     @Override

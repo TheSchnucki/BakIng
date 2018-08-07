@@ -1,5 +1,6 @@
 package com.theschnucki.baking.prepareRecipe;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
     private static final String LOG_TAG = RecipeActivity.class.getSimpleName();
 
     android.support.v4.app.FragmentManager fragmentManager;
+    android.support.v4.app.Fragment mContent;
 
     public static Recipe recipe = null;
     public static Step step = null;
@@ -34,12 +36,17 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_preperation);
 
         Intent intent = getIntent();
         if (intent == null) {
             Log.e(LOG_TAG, "Intent is null");
             closeOnError();
+        } else if (savedInstanceState != null){
+            recipe = savedInstanceState.getParcelable("recipe");
+            step = savedInstanceState.getParcelable("step");
+            Log.v(LOG_TAG, "-----Recipe and Step extracted from SavedInstanceState");
         } else {
             recipe = intent.getParcelableExtra(RecipeListFragment.EXTRA_RECIPE);
             if (recipe == null) {
@@ -51,7 +58,15 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         //Set ActionBar Title to Recipe Name
         getSupportActionBar().setTitle(recipe.getName());
 
+        if (savedInstanceState != null)  {
+            Log.v(LOG_TAG, "-----Fragment in OnSaveInstanceState not null!");
+            //mContent = getSupportFragmentManager().getFragment(savedInstanceState,"myFragment");
+        } else {
+
+        }
+
         showStepList(recipe);
+
 
         Log.v(LOG_TAG, "Recipe name: " + recipe.getName());
     }
@@ -66,6 +81,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepsListFragment).commit();
+        mContent = stepsListFragment;
     }
 
     public void switchToStepList(View view) {
@@ -78,6 +94,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepsListFragment).commit();
+        mContent = stepsListFragment;
     }
 
 
@@ -93,6 +110,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, ingredientListFragment).commit();
+        mContent = ingredientListFragment;
     }
 
     // Set Step detail view Fragment
@@ -109,6 +127,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         stepDetailFragment.setArguments(bundle);
 
         fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment).commit();
+        mContent = stepDetailFragment;
     }
 
     /** Step Detail button navigation */
@@ -132,7 +151,19 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
             onStepSelected(step);
         } else {
             Toast.makeText(this, "This is already the last step", Toast.LENGTH_LONG).show();
-        }    }
+        }
+    }
+
+    /**
+     * Trying to save Fragment state before orientation
+     */
+    @Override
+    protected void onSaveInstanceState (Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("recipe", recipe);
+        outState.putParcelable("step", step);
+        getSupportFragmentManager().putFragment(outState, "myFragment", mContent);
+    }
 
     private void closeOnError(){
         finish();
