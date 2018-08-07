@@ -3,10 +3,12 @@ package com.theschnucki.baking.prepareRecipe;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.theschnucki.baking.R;
@@ -61,6 +63,12 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
 
         //Set ActionBar Title to Recipe Name
         getSupportActionBar().setTitle(recipe.getName());
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            getSupportActionBar().hide();
+        } else {
+            getSupportActionBar().show();
+        }
 
         //find the right fragment to display
         if (fragmentTag != null) {

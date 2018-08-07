@@ -41,8 +41,8 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     @Override
     public void onDataSetChanged() {
         recipe = IngredientWidgetService.getRecipe();
-        Log.v(LOG_TAG, "----- Got Recipe: " +  recipe.getName());
-        ingredients = recipe.getIngredients();
+        //Log.v(LOG_TAG, "----- Got Recipe: " +  recipe.getName());
+        if (recipe != null) ingredients = recipe.getIngredients();
     }
 
     @Override

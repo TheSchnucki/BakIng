@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -43,6 +42,9 @@ public class StepDetailFragment extends Fragment {
     private PlayerView mPlayerView;
     private SimpleExoPlayer mExoPlayer;
 
+    private Long playerPosition = 0l;
+    private boolean playIfReady = true;
+
     private Step step = null;
 
     // Required empty public constructor
@@ -61,6 +63,8 @@ public class StepDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
 
         if (savedInstanceState != null){
+            playerPosition = savedInstanceState.getLong("PlayerPosition");
+            playIfReady = savedInstanceState.getBoolean("PlayIfReady");
             step = savedInstanceState.getParcelable("step");
         } else {
             loadStepData();
@@ -92,15 +96,6 @@ public class StepDetailFragment extends Fragment {
 
         return rootView;
     }
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        if (savedInstanceState != null){
-
-        }
-    }
-
     private void loadStepData () {
         if (getArguments() != null) {
             Bundle extras = getArguments();
@@ -120,12 +115,15 @@ public class StepDetailFragment extends Fragment {
                 MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                         getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
                 mExoPlayer.prepare(mediaSource);
-                mExoPlayer.setPlayWhenReady(true);
+                mExoPlayer.setPlayWhenReady(playIfReady);
+                mExoPlayer.seekTo(playerPosition);
             }
     }
 
     private void releasePlayer () {
         if (mExoPlayer!= null) {
+            playerPosition = mExoPlayer.getContentPosition();
+            playIfReady = mExoPlayer.getPlayWhenReady();
             mExoPlayer.stop();
             mExoPlayer.release();
             mExoPlayer = null;
@@ -135,6 +133,8 @@ public class StepDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putLong("PlayerPosition", playerPosition);
+        outState.putBoolean("PlayIfReady", playIfReady);
         outState.putParcelable("step", step);
     }
 

@@ -68,7 +68,7 @@ public class IngredientWidgetService extends IntentService {
      * parameters.
      */
     private void handleActionUpdateIngredients() {
-        Log.v(LOG_TAG, "----- Service Handler for Ingredients is working" + recipe.getName());
+        //Log.v(LOG_TAG, "----- Service Handler for Ingredients is working" + recipe.getName());
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, IngredientWidgetProvider.class));
 
