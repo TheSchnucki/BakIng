@@ -1,14 +1,11 @@
 package com.theschnucki.baking.prepareRecipe;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.theschnucki.baking.R;
@@ -41,7 +38,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_preperation);
+        setContentView(R.layout.activity_preparation);
 
         Intent intent = getIntent();
         if (savedInstanceState != null) {
