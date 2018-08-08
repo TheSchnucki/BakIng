@@ -31,14 +31,20 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
     public static Step step = null;
 
     private String fragmentTag = null;
-
-    //TODO preserve display on rotation (fragment)
+    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_preparation);
+
+        if (findViewById(R.id.baking_details_linear_layout) != null) {
+            mTwoPane = true;
+            Log.v(LOG_TAG, "*****Two Pane Design Active");
+        } else {
+            mTwoPane = false;
+        }
 
         Intent intent = getIntent();
         if (savedInstanceState != null) {
@@ -143,7 +149,13 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         stepDetailFragment.setArguments(bundle);
 
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment, "stepDetailFragment").commit();
+
+        if (mTwoPane) {
+            fragmentManager.beginTransaction().replace(R.id.activity_prepare_detail_fl, stepDetailFragment, "stepDetailFragment").commit();
+        }else {
+            fragmentManager.beginTransaction().replace(R.id.activity_prepare_fl, stepDetailFragment, "stepDetailFragment").commit();
+        }
+
         fragmentTag = "stepDetailFragment";
     }
 
