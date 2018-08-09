@@ -50,7 +50,7 @@ public class PrepareActivity extends AppCompatActivity implements StepsListFragm
         if (savedInstanceState != null) {
             recipe = savedInstanceState.getParcelable("recipe");
             step = savedInstanceState.getParcelable("step");
-            Log.v(LOG_TAG, "*****Step after restart: " + step.getId() + " " + step.getDescription());
+            //Log.v(LOG_TAG, "*****Step after restart: " + step.getId() + " " + step.getDescription());
             fragmentTag = savedInstanceState.getString("fragmentTag");
             Log.v(LOG_TAG, "-----Recipe and Step extracted from SavedInstanceState");
         } else if (intent == null) {
