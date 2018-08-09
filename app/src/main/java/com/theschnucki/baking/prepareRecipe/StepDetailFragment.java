@@ -79,10 +79,8 @@ public class StepDetailFragment extends Fragment {
         shortDescriptionTv.setText(step.getShortDescription());
         descriptionTv.setText(step.getDescription());
 
-
         mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.ic_no_picture));
 
-        // TODO initialize ExoPlayer
         String videoUrl = step.getVideoURL();
         Log.v(LOG_TAG, "----- Is valid URL: " + URLUtil.isValidUrl(videoUrl));
 
@@ -122,8 +120,6 @@ public class StepDetailFragment extends Fragment {
 
     private void releasePlayer () {
         if (mExoPlayer!= null) {
-            playerPosition = mExoPlayer.getContentPosition();
-            playIfReady = mExoPlayer.getPlayWhenReady();
             mExoPlayer.stop();
             mExoPlayer.release();
             mExoPlayer = null;
@@ -133,7 +129,9 @@ public class StepDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        playerPosition = mExoPlayer.getContentPosition();
         outState.putLong("PlayerPosition", playerPosition);
+        playIfReady = mExoPlayer.getPlayWhenReady();
         outState.putBoolean("PlayIfReady", playIfReady);
         outState.putParcelable("step", step);
     }
